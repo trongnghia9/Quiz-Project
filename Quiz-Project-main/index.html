@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World Team - Create Your Own Quiz</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/chat.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+  <!-- Chat Widget -->
+  <div id="chatWidget" class="chat-widget">
+    <button class="chat-toggle" id="chatToggleBtn">
+      <i class="fas fa-comments"></i>
+    </button>
+    <div class="chat-container">
+      <div class="chat-header">
+        <h2>Chat with AI Assistant</h2>
+        <div class="chat-header-buttons">
+          <button id="clearChatButton" class="clear-button">
+            <i class="fas fa-trash"></i>
+            Clear History
+          </button>
+          <button id="minimizeChatBtn" class="minimize-button">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div id="chatMessages" class="chat-messages"></div>
+      <div class="chat-input-container">
+        <input type="text" id="chatInput" class="chat-input" placeholder="Type your message here..." />
+        <button id="sendButton" class="send-button">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="landing-page">
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+    <div class="content-wrapper">
+      <!-- Navigation -->
+      <nav class="nav-container" id="navbar">
+        <div class="nav-content">
+          <div class="nav-logo">
+            <i class="fas fa-brain"></i>
+            Hello World Team
+          </div>
+
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-content">
+          <h1 class="hero-title fade-in">Create Your Own Quiz</h1>
+          <p class="hero-subtitle slide-up">Generate custom quizzes on any topic with our AI-powered platform
+          </p>
+          <div class="hero-cta">
+            <button id="createQuizBtn" class="nav-button primary">
+              <i class="fas fa-plus"></i>
+              <span>Create New Quiz</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quiz Form Modal -->
+      <div id="quizModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2><i class="fas fa-plus-circle"></i> Create Your Quiz</h2>
+            <span class="close">&times;</span>
+          </div>
+          <form id="quizForm" class="quiz-form">
+            <div class="form-group">
+              <label for="quizTitle">Quiz Topic</label>
+              <div class="input-wrapper">
+                <i class="fas fa-book input-icon"></i>
+                <input type="text" id="quizTitle" name="quizTitle" required placeholder="Enter the topic for your quiz">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="quizLanguage">Language</label>
+              <div class="input-wrapper">
+                <i class="fas fa-globe input-icon"></i>
+                <select id="quizLanguage" name="quizLanguage" required>
+                  <option value="" disabled selected>Select quiz language</option>
+                  <optgroup label="Asian">
+                    <option value="VI">Vietnamese (Tiếng Việt)</option>
+                    <option value="JA">Japanese (日本語)</option>
+                    <option value="KO">Korean (한국어)</option>
+                    <option value="ZH">Chinese (中文)</option>
+                    <option value="TH">Thai (ไทย)</option>
+                  </optgroup>
+                  <optgroup label="European">
+                    <option value="EN">English</option>
+                    <option value="FR">French (Français)</option>
+                    <option value="DE">German (Deutsch)</option>
+                    <option value="ES">Spanish (Español)</option>
+                    <option value="IT">Italian (Italiano)</option>
+                  </optgroup>
+                  <optgroup label="Other">
+                    <option value="AR">Arabic (العربية)</option>
+                    <option value="HI">Hindi (हिन्दी)</option>
+                    <option value="RU">Russian (Русский)</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="questionCount">Number of Questions</label>
+              <div class="input-wrapper">
+                <i class="fas fa-list-ol input-icon"></i>
+                <input type="number" id="questionCount" name="questionCount" min="5" max="20" value="10" required>
+              </div>
+              <small class="form-hint">Choose between 5 and 20 questions</small>
+            </div>
+            <button type="submit" class="submit-btn">
+              <span>Generate Quiz</span>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <p class="footer-text">© 2025 Hello World Team. All rights reserved.</p>
+          <p class="footer-author">Created with <i class="fas fa-heart"></i> by Hello World Team</p>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="assets/js/utils/api.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/chat.js"></script>
+</body>
+
+</html>

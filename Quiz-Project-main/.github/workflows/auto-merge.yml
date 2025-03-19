@@ -1,0 +1,41 @@
+name: Auto Merge Main to Other Branches
+
+on:
+  push:
+    branches:
+      - main  # Chạy workflow khi có code mới trên main
+
+jobs:
+  merge-main:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Lấy toàn bộ lịch sử commit để tránh lỗi checkout
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Get all branches except main
+        run: |
+          git fetch origin "+refs/heads/*:refs/remotes/origin/*"
+          git branch -r | grep -vE "main|HEAD" | awk '{print $1}' | sed 's/origin\///' > branches.txt
+          cat branches.txt  # Debug log xem danh sách branch
+      - name: Merge main into other branches (Force theirs)
+        run: |
+          while IFS= read -r BRANCH; do
+            echo "🔄 Merging into $BRANCH..."
+            git checkout $BRANCH || { echo "❌ Failed to checkout $BRANCH"; continue; }
+            git reset --hard origin/$BRANCH  # Đồng bộ branch trước khi merge
+            git merge origin/main -X theirs --no-edit && git push origin $BRANCH || echo "✅ Nothing to push for $BRANCH"
+          done < branches.txt
+          
+      - name: Notify branches to fetch latest code
+        run: |
+          while IFS= read -r BRANCH; do
+            echo "✅ Branch $BRANCH has been updated. Please fetch latest code."
+          done < branches.txt

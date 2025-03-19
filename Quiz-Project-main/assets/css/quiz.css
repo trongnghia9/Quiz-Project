@@ -1,0 +1,232 @@
+/* Quiz CSS */
+body {
+    background-color: #0b1120;
+    background-image: url('https://placehold.co/1920x1080/0b1120/0b1120.png?text=starry+background');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Quiz Results Animations */
+#quiz-results.show {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#quiz-results .text-center,
+#quiz-results .bg-gray-900,
+#quiz-results .flex {
+    animation: slideIn 0.6s ease-out forwards;
+}
+
+#quiz-results .bg-gray-900 {
+    animation-delay: 0.2s;
+}
+
+#quiz-results .flex {
+    animation-delay: 0.4s;
+}
+
+/* Trophy Animation */
+@keyframes trophyBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+#quiz-results .fa-trophy {
+    animation: trophyBounce 2s ease-in-out infinite;
+}
+
+/* Score Cards Hover Effects */
+#quiz-results .bg-gray-800 {
+    transition: all 0.3s ease;
+}
+
+#quiz-results .bg-gray-800:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Gradient Text Animation */
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+#quiz-results h1.bg-gradient-to-r {
+    background-size: 200% auto;
+    animation: gradientFlow 3s linear infinite;
+}
+
+/* Button Hover Effects */
+#quiz-results button {
+    transition: all 0.3s ease;
+}
+
+#quiz-results button:hover {
+    transform: translateY(-2px);
+}
+
+#quiz-results button:active {
+    transform: translateY(0);
+}
+
+/* Confetti Animation */
+@keyframes confetti {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ffd700;
+    top: -10px;
+    opacity: 0;
+}
+
+/* Nội dung bên trong spinner */
+#loading-spinner > div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #0A0F1A, #1A1F2A);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Spinner */
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #e5e7eb;
+    border-top: 6px solid transparent;
+    border-radius: 50%;
+    position: relative;
+    animation: spin 1s ease-in-out infinite;
+}
+
+.spinner::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    border-radius: 50%;
+    border: 6px solid transparent;
+    border-top-color: #3b82f6;
+    border-right-color: #1d4ed8;
+    animation: spin 1.5s linear infinite;
+}
+
+/* Text */
+#loading-spinner p {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    animation: fadeInOut 2s infinite;
+}
+
+/* Keyframes */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Class hidden */
+.hidden {
+    display: none;
+}
+
+.form-checkbox {
+    pointer-events: none; /* Checkbox không nhận click trực tiếp */
+}
+.answer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Đảm bảo checkbox ở trái */
+    padding: 0.75rem;
+    transition: background-color 0.3s ease;
+}
+
+.checkbox-container {
+    height: 1.25rem; /* h-5 */
+    width: 1.25rem; /* w-5 */
+    border: 2px solid #6b7280; /* border-gray-500 */
+    border-radius: 0.25rem; /* rounded */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s ease;
+}
+
+.checkbox-container i {
+    font-size: 0.875rem; /* Kích thước icon */
+}
+
+/* Ẩn icon khi hover mà không chọn (button chưa có bg-gray-600) */
+.answer:hover .checkbox-container i {
+    display: none; /* Không hiện icon khi hover mà không chọn */
+}
+
+/* Hiện icon khi đã chọn (bg-gray-600) */
+.answer.bg-gray-600 .checkbox-container i {
+    display: inline-block; /* Hiện icon khi đã chọn */
+}
+
+/* Đảm bảo icon hiển thị đúng màu khi chọn */
+.answer.bg-gray-600 .checkbox-container i.text-blue-500 {
+    color: #3b82f6; /* text-blue-500 */
+}
+
+/* Khi đúng (bg-green-500) */
+.answer.bg-green-500 .checkbox-container i {
+    display: inline-block;
+    color: #34d399; /* text-green-500 */
+}
+
+/* Khi sai (bg-red-500) */
+.answer.bg-red-500 .checkbox-container i {
+    display: inline-block;
+    color: #f87171; /* text-red-500 */
+}
+
+/* Khi button bị disabled */
+.answer:disabled .checkbox-container i {
+    opacity: 0.6;
+}
